@@ -1,0 +1,14 @@
+.root{
+    -fx-background-color: midnightblue;
+}
+#title{
+    -fx-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 30pt;
+}
+#btn-upload{
+
+}
+#label-upload{
+    -fx-text-fill: white;
+}
