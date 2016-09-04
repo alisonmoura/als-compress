@@ -8,7 +8,7 @@ import java.util.Map;
 public class Compress {
 
     private String stringfiedFile;
-    private Map<Character,Integer> frequencyMap = new HashMap<>();
+    private HuffmanMap frequencyMap = new HuffmanMap();
 
     public void doCompress(File file) throws CompressException{
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -21,7 +21,6 @@ public class Compress {
             }
             stringfiedFile = sb.toString();
             doCompress();
-            System.out.println(stringfiedFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new CompressException();
@@ -40,5 +39,7 @@ public class Compress {
                 frequencyMap.put(c,frequencyMap.get(c)+1);
             }
         }
+
+        new HuffmanTree().createTree(frequencyMap);
     }
 }
