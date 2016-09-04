@@ -1,5 +1,5 @@
 .root{
-    -fx-background-color: midnightblue;
+    -fx-background-color: #040000;
 }
 #title{
     -fx-fill: white;
@@ -7,8 +7,20 @@
     -fx-font-size: 30pt;
 }
 #btn-upload{
-
+    -fx-background-color: darkorange;
+    -fx-text-fill: white;
+    -fx-background-radius: 2px;
+    -fx-font-size: 15pt;
+}
+#btn-upload:hover{
+    -fx-background-color: #b34300;
+    -fx-cursor: hand;
 }
 #label-upload{
     -fx-text-fill: white;
+    -fx-font-size: 15pt;
+}
+#home-grid{
+    -fx-border-color: darkorange;
+    -fx-border-width: 2px;
 }

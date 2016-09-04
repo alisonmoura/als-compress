@@ -34,6 +34,7 @@ public class Launcher extends Application{
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setId("home-grid");
 
         Text title = new Text("ALS Compress");
         title.setId("title");
@@ -51,18 +52,25 @@ public class Launcher extends Application{
             if(uploadedFile != null) openFile(uploadedFile);
         });
 
+        Label expandsLabel = new Label("Expanding file:");
+        expandsLabel.setId("label-upload");
+
+        Button btnExpandsFile = new Button("Select file");
+        btnExpandsFile.setId("btn-upload");
+
         grid.add(title,0,0,2,1);
         grid.add(uploadLabel,0,1);
         grid.add(btnUploadFile,1,1);
+        grid.add(expandsLabel,0,2);
+        grid.add(btnExpandsFile,1,2);
 
-        Scene scene = new Scene(grid, 1000, 400);
+        Scene scene = new Scene(grid, 500, 400);
         scene.getStylesheets().add(Launcher.class.getResource("css/style.css").toExternalForm());
 
         return scene;
     }
 
-    private static void configureFileChooser(
-            final FileChooser fileChooser) {
+    private static void configureFileChooser(final FileChooser fileChooser) {
         fileChooser.setTitle("Select file to compact");
         fileChooser.setInitialDirectory(
                 new File(System.getProperty("user.home"))
@@ -73,21 +81,9 @@ public class Launcher extends Application{
     }
 
     private void openFile(File file) {
-        try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            String all = sb.toString();
-            System.out.println(all);
-        } catch (FileNotFoundException e) {
-            logg(e);
-            e.printStackTrace();
-        } catch (IOException e) {
+        try{
+            new Compress().doCompress(file);
+        } catch (CompressException e) {
             logg(e);
             e.printStackTrace();
         }
